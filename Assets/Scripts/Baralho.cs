@@ -24,9 +24,10 @@ public class Baralho : MonoBehaviour
             if(i > 0)
             {
                 Vector3 pos = this.transform.position + new Vector3(0,
-                    0,
-                    0.01f * i);
-                GameObject gameObject = (GameObject)Instantiate(cartaPrefab, pos, Quaternion.identity);
+                    0.005f * i,
+                    0);
+                Quaternion rot = Quaternion.Euler(-90, 0, 0);
+                GameObject gameObject = (GameObject)Instantiate(cartaPrefab, pos, rot);
                 gameObject.transform.parent = this.gameObject.transform;
                 Carta carta = gameObject.GetComponent<Carta>();
 
@@ -58,8 +59,10 @@ public class Baralho : MonoBehaviour
 
     public void DarCartas()
     {
+        Quaternion rot = Quaternion.Euler(90, 0, 0);
         tombo = GetCarta();
         tombo.transform.position = gameObjectTombo.transform.position;
+        tombo.transform.rotation = rot;
         manilha = tombo.valor;
         if(manilha == 13)
         {
@@ -82,6 +85,7 @@ public class Baralho : MonoBehaviour
                     carta.SetaManilha();
                 }
                 carta.transform.position = jogador.slots[i].transform.position;
+                carta.transform.rotation = rot;
             }
         }
     }
