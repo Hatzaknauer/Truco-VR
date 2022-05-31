@@ -20,28 +20,26 @@ public class Jogador : MonoBehaviour
         rodada = 0;
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Ao clicar pega a posição do mouse no clique e passa como destino para o agente
-        if (Input.GetMouseButtonUp(0))
+       
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            Carta carta = hit.collider.GetComponentInParent<Carta>();
+            if(carta != null)
             {
-                Carta carta = hit.collider.GetComponentInParent<Carta>();
-                if(carta != null)
-                {
-                    JogaCarta(carta);
-                }
+                JogaCarta(carta);
             }
-        }
+        }    
     } 
-
+   
     public void JogaCarta(Carta carta)
     {
-
+        
         Carta vindo = baralho.GetCarta();
         print("Vindo " + vindo.numero + "  " + vindo.naipe);
         baralho.Descarta(carta);
