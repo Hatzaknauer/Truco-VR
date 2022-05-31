@@ -31,7 +31,10 @@ public class Jogador : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Carta carta = hit.collider.GetComponentInParent<Carta>();
-                JogaCarta(carta);
+                if(carta != null)
+                {
+                    JogaCarta(carta);
+                }
             }
         }
     } 

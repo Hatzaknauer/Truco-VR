@@ -136,8 +136,11 @@ public class Baralho : MonoBehaviour
     {
         foreach(Carta carta in descarte)
         {
-            cartas.Add(carta.gameObject);
-            carta.Reset();
+            if(carta != null)
+            {
+                cartas.Add(carta.gameObject);
+                carta.Reset();
+            }
         }
         descarte.Clear();
         truco = 1;
