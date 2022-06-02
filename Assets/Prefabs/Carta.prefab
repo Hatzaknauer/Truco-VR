@@ -195,7 +195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5531617017451662552
 Transform:
   m_ObjectHideFlags: 0
@@ -409,10 +409,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda6b67bf73f6b443941a37798ed5542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  botao: {fileID: 4745826907174533922}
   naipe: 0
   numero: 
   valor: 0
   manilha: 0
+  imgNaipe:
+  - {fileID: 2800000, guid: 06abf6bc0134cf14cb860ac532832a0d, type: 3}
+  - {fileID: 2800000, guid: fccc8fa97baaa7e459161fc1acd8e5f6, type: 3}
+  - {fileID: 2800000, guid: a38f8ce48440c034dbd2fcac01da8b9f, type: 3}
+  - {fileID: 2800000, guid: a73cd8c213a53174893a37d83e6d76e9, type: 3}
+  material: {fileID: 475886823565723786}
   txtNumero: {fileID: 4878213514094728930}
 --- !u!54 &-2112510245977488805
 Rigidbody:

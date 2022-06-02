@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 
 public enum EnumNaipes
 {
@@ -13,11 +15,13 @@ public enum EnumNaipes
 
 public class Carta : MonoBehaviour
 {
-
+    public GameObject botao;
     public EnumNaipes naipe;
     public string numero;
     public int valor;
     public bool manilha;
+    public Texture[] imgNaipe;
+    public MeshRenderer material;
 
     public TMP_Text txtNumero;
 
@@ -45,7 +49,7 @@ public class Carta : MonoBehaviour
                 numero = "A";
             }
         }
-
+        material.material.mainTexture = imgNaipe[((int)naipe) - 1];
         txtNumero.text = numero;
     }
 

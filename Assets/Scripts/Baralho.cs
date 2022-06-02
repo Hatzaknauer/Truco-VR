@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Baralho : MonoBehaviour
 {
@@ -13,11 +15,15 @@ public class Baralho : MonoBehaviour
     public Jogador[] jogadores;
     public int truco;
 
+    public TMP_Text txtPontos;
+
     int rodada;
     int pontos;
     
     void Start()
     {
+        pontos = 0;
+        txtPontos.text = pontos.ToString();
         truco = 1;
         for (int i = 0; i < 41; i++)
         {
@@ -62,7 +68,7 @@ public class Baralho : MonoBehaviour
         Quaternion rot = Quaternion.Euler(90, 0, 0);
         tombo = GetCarta();
         tombo.transform.position = gameObjectTombo.transform.position;
-        tombo.transform.rotation = rot;
+        tombo.transform.rotation = Quaternion.Euler(90, 90, 0);
         manilha = tombo.valor;
         if(manilha == 13)
         {
@@ -86,6 +92,7 @@ public class Baralho : MonoBehaviour
                 }
                 carta.transform.position = jogador.slots[i].transform.position;
                 carta.transform.rotation = rot;
+                carta.botao.SetActive(true);
             }
         }
     }
@@ -97,6 +104,7 @@ public class Baralho : MonoBehaviour
             0,
             0.01f);
         carta.transform.position = pos;
+        carta.botao.SetActive(false);
     }
 
     public Carta GetCarta()
@@ -123,6 +131,7 @@ public class Baralho : MonoBehaviour
         {
             pontos+= truco;
             Descarta(tombo);
+            txtPontos.text = pontos.ToString();
             tombo = null;
             foreach (Jogador jogador in jogadores)
             {
@@ -152,13 +161,9 @@ public class Baralho : MonoBehaviour
         int chanceDeAceitar = Random.Range(1, 10);
         if(chanceDeAceitar > 6)
         {
-            if (truco == 1)
+            if(truco < 12)
             {
-                truco = 3;
-            }
-            else
-            {
-                truco *= 2;
+                truco += 3;
             }
             print("TRUUUUUUUUUUUCO!!!!, valendo: " + truco);
         }

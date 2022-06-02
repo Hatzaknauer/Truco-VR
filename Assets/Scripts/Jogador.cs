@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Jogador : MonoBehaviour
 {
@@ -9,9 +11,13 @@ public class Jogador : MonoBehaviour
     int rodada;
     public GameObject[] slots;
     public Baralho baralho;
+    public TMP_Text txtPontos,
+        txtDebug;
 
     void Start()
     {
+        pontos = 0; 
+        txtPontos.text = pontos.ToString();
         baralho = FindObjectOfType<Baralho>();
     }
 
@@ -41,7 +47,7 @@ public class Jogador : MonoBehaviour
     {
         
         Carta vindo = baralho.GetCarta();
-        print("Vindo " + vindo.numero + "  " + vindo.naipe);
+        txtDebug.text = ("Vindo " + vindo.numero + "  " + vindo.naipe);
         baralho.Descarta(carta);
         baralho.Descarta(vindo);
         for (int i = 0; i < 3; i++)
@@ -53,30 +59,30 @@ public class Jogador : MonoBehaviour
         }
         if (carta.manilha && !vindo.manilha)
         {
-            print("Ganhou com manilha de " + carta.naipe);
+            txtDebug.text = ("Ganhou com manilha de " + carta.naipe);
             GanhouRodada();
         }
         else if (!carta.manilha && vindo.manilha)
         {
-            print("Perdeu para manilha de " + vindo.naipe);
+            txtDebug.text = ("Perdeu para manilha de " + vindo.naipe);
             baralho.BotGanhou();
         }
         else if (carta.manilha && vindo.manilha)
         {
             if (((int)carta.naipe) > ((int)vindo.naipe))
             {
-                print("Ganhou com manilha de " + carta.naipe);
+                txtDebug.text = ("Ganhou com manilha de " + carta.naipe);
                 GanhouRodada();
             }
             else
             {
-                print("Perdeu para manilha de " + vindo.naipe);
+                txtDebug.text = ("Perdeu para manilha de " + vindo.naipe);
             }
         }
         else if (carta.valor == vindo.valor)
         {
-            print(carta.numero + "  " + carta.naipe);
-            print("Melou");
+            txtDebug.text = (carta.numero + "  " + carta.naipe);
+            txtDebug.text = ("Melou");
             GanhouRodada();
             baralho.BotGanhou();
         }
@@ -84,14 +90,14 @@ public class Jogador : MonoBehaviour
         {
             if (carta.valor > vindo.valor)
             {
-                print(carta.numero + "  " + carta.naipe);
-                print("Ganhou");
+                txtDebug.text = (carta.numero + "  " + carta.naipe);
+                txtDebug.text = ("Ganhou");
                 GanhouRodada();
             }
             else
             {
-                print(carta.numero + "  " + carta.naipe);
-                print("Perdeu");
+                txtDebug.text = (carta.numero + "  " + carta.naipe);
+                txtDebug.text = ("Perdeu");
                 baralho.BotGanhou();
             }
         }
@@ -111,6 +117,7 @@ public class Jogador : MonoBehaviour
         baralho.tombo = null;
         pontos += baralho.truco;
         Reset();
+        txtPontos.text = pontos.ToString();
         TerminaRodada();
     }
 
@@ -131,7 +138,7 @@ public class Jogador : MonoBehaviour
     {
         if(baralho.truco >= 12)
         {
-            print("Tá valendo o jogo");
+            txtDebug.text = ("Tá valendo o jogo");
         }
         else
         {
