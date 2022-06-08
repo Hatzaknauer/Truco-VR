@@ -22,12 +22,19 @@ public class Carta : MonoBehaviour
     public bool manilha;
     public Texture[] imgNaipe;
     public MeshRenderer material;
+    public Animator animator;
 
     public TMP_Text txtNumero;
 
     public void Reset()
     {
         manilha = false;
+        Vector3 pos = this.transform.position + new Vector3(0,
+                            1f,
+                            0);
+        Quaternion rot = Quaternion.Euler(-90, 0, 0);
+        transform.position = pos;
+        transform.rotation = rot;
     }
 
     public void Construtor (EnumNaipes enumNaipe, int num)
@@ -70,6 +77,11 @@ public class Carta : MonoBehaviour
         }
 
         return realeza;
+    }
+
+    public void DesligaAnim() 
+    {
+        animator.enabled = false;
     }
 
     public void SetaManilha()

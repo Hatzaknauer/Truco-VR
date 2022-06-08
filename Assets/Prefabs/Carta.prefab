@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 4799138630879223659}
   - component: {fileID: 4799138630879223655}
   - component: {fileID: -2112510245977488805}
+  - component: {fileID: 4878995003096272320}
   m_Layer: 2
   m_Name: Carta
   m_TagString: Untagged
@@ -327,7 +328,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4799138630879223658}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.2600055, y: 0.4059735, z: 0.0045614997}
   m_Children:
@@ -336,7 +337,7 @@ Transform:
   - {fileID: 5531617017451662552}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &4799138630879223657
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -420,6 +421,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: a38f8ce48440c034dbd2fcac01da8b9f, type: 3}
   - {fileID: 2800000, guid: a73cd8c213a53174893a37d83e6d76e9, type: 3}
   material: {fileID: 475886823565723786}
+  animator: {fileID: 4878995003096272320}
   txtNumero: {fileID: 4878213514094728930}
 --- !u!54 &-2112510245977488805
 Rigidbody:
@@ -437,6 +439,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &4878995003096272320
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799138630879223658}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fe89d8e7a9c95664f94d9db1bbad286b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &9122317209374087176
 GameObject:
   m_ObjectHideFlags: 0
