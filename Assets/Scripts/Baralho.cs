@@ -19,8 +19,9 @@ public class Baralho : MonoBehaviour
     public Jogador[] jogadores;
     public int truco;
     public TurnManager turnManager;
+    public GameObject Aceitas;
 
-    public TMP_Text txtPontos;
+    public TMP_Text txtPontos, txtTruco;
 
     int rodada;
     int pontos;
@@ -68,6 +69,30 @@ public class Baralho : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(jogadores[0].pontos >= 12)
+        {
+            Carta carta = GetCarta();
+            Vector3 pos = transform.position + new Vector3(Random.Range(0, 2f),
+                        0,
+                        Random.Range(0, 2f));
+            Quaternion rot = Quaternion.Euler(90, 0, 0);
+            carta.transform.position = pos;
+            carta.transform.rotation = rot;
+        }
+        else if(pontos >= 12)
+        {
+            Carta carta = GetCarta();
+            Vector3 pos = transform.position + new Vector3(Random.Range(0, 2f),
+                        0,
+                        Random.Range(0, 2f));
+            Quaternion rot = Quaternion.Euler(90, 0, 0);
+            carta.transform.position = pos;
+            carta.transform.rotation = rot;
+        }
+    }
+
     public void DarCartas()
     {
         Quaternion rot = Quaternion.Euler(90, 0, 0);
@@ -106,10 +131,12 @@ public class Baralho : MonoBehaviour
     public void Descarta(Carta carta)
     {
         descarte.Add(carta);
-        Vector3 pos = this.transform.position + new Vector3(0,
+        Vector3 pos = transform.position + new Vector3(0,
             0,
-            1f);
+            0);
+        Quaternion rot = Quaternion.Euler(-90, 0, 0);
         carta.transform.position = pos;
+        carta.transform.rotation = rot;
         carta.botao.SetActive(false);
     }
 
@@ -119,8 +146,6 @@ public class Baralho : MonoBehaviour
         Carta carta = cartas[index].GetComponent<Carta>();
         if (tombo != null)
         {
-            int manilha = tombo.valor;
-            manilha++;
             if (carta.valor == manilha)
             {
                 carta.manilha = true;
@@ -172,6 +197,10 @@ public class Baralho : MonoBehaviour
                 {
                     cartas.Add(carta.gameObject);
                     carta.Reset();
+                    Vector3 pos = transform.position;
+                    Quaternion rot = Quaternion.Euler(-90, 0, 0);
+                    carta.transform.position = pos;
+                    carta.transform.rotation = rot;
                 }
             }
         }
@@ -195,14 +224,40 @@ public class Baralho : MonoBehaviour
             {
                 truco = 3;
             }
-            print("TRUUUUUUUUUUUCO!!!!, valendo: " + truco);
+            jogador.txtDebug.text = ("TRUUUUUUUUUUUCO!!!!, valendo: " + truco);
         }
         else
         {
             
             jogador.Pontuo();
-            print("Oponente fugiu, ganhou: " + truco );
+            jogador.txtDebug.text = ("Oponente fugiu, ganhou: " + truco );
         }
+    }
+
+    public void BotChamaTruco()
+    {
+        Aceitas.SetActive(true);
+    }
+
+    public void JogadorAceita()
+    {
+        if (truco < 12 && truco > 1)
+        {
+            truco += 3;
+        }
+        else
+        {
+            truco = 3;
+        }
+        turnManager.gameMode = turnManager.oldMode;
+        Aceitas.SetActive(false);
+
+    }
+
+    public void JogadorRecusa()
+    {
+        BotGanhou();
+        Aceitas.SetActive(false);
     }
 
     public void JogarCarta(bool bot)

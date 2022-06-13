@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum EnumTurns
 {
@@ -17,14 +18,19 @@ public class TurnManager : MonoBehaviour
     public float timeEmbate;
     Baralho baralho;
     Jogador jogador;
-    public EnumTurns gameMode;
+    public EnumTurns gameMode, 
+        oldMode;
+    public int probTrucoX,
+        probTrucoY;
     public int rodada,
         turno,
         truco;
     bool jogou;
     public bool aguardando,
         botJogou,
-        vendo;
+        vendo,
+        botTrucou,
+        playerTrucou;
     bool wasPlayer;
 
 
@@ -44,6 +50,8 @@ public class TurnManager : MonoBehaviour
         botJogou = false;
         aguardando = false;
         vendo = false;
+        botTrucou = false;
+        playerTrucou = false;
     }
 
     // Update is called once per frame
@@ -75,6 +83,16 @@ public class TurnManager : MonoBehaviour
             case EnumTurns.botTurn:
                 if (!botJogou)
                 {
+                    int chanceDeTrucar = Random.Range(1, probTrucoX);
+                    if (chanceDeTrucar < probTrucoY && !botTrucou)
+                    {
+                        baralho.BotChamaTruco();
+                        oldMode = gameMode;
+                        gameMode = EnumTurns.trucoBot;
+                        playerTrucou = false;
+                        botTrucou = true;
+                        break;
+                    }
                     botJogou = true;
                     baralho.JogarCarta(true);
                 }
@@ -146,15 +164,12 @@ public class TurnManager : MonoBehaviour
         baralho.Descarta(baralho.jogandoBot);
         baralho.Descarta(baralho.jogandoJogador);
         jogador.GanhouRodada();
-        print("a");
-
     }
     public void BotGanha()
     {
         baralho.Descarta(baralho.jogandoBot);
         baralho.Descarta(baralho.jogandoJogador);
         baralho.BotGanhou();
-        print("b");
-
     }
+
 }

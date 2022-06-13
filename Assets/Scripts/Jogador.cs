@@ -104,8 +104,14 @@ public class Jogador : MonoBehaviour
         {
             txtDebug.text = ("Tá valendo o jogo");
         }
+        else if (turnManager.playerTrucou)
+        {
+            txtDebug.text = ("Já truco");
+        }
         else
         {
+            turnManager.playerTrucou = true;
+            turnManager.botTrucou = false;
             baralho.ChamaTruco(this);
         }
     }

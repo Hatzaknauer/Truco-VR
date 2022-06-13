@@ -29,12 +29,6 @@ public class Carta : MonoBehaviour
     public void Reset()
     {
         manilha = false;
-        Vector3 pos = this.transform.position + new Vector3(0,
-                            1f,
-                            0);
-        Quaternion rot = Quaternion.Euler(-90, 0, 0);
-        transform.position = pos;
-        transform.rotation = rot;
     }
 
     public void Construtor (EnumNaipes enumNaipe, int num)
